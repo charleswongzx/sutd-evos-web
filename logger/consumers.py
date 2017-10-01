@@ -2,6 +2,8 @@ from channels import Group
 from .models import EngineStatus
 import json
 
+recording = False
+
 
 def ws_connect(message):
     message.reply_channel.send({"accept": True})
@@ -13,26 +15,41 @@ def ws_disconnect(message):
 
 
 def ws_message(message):
+    global recording
 
     obj = json.loads(message.content['text'])
-    print(obj)
 
-    # Mirrors message back to sender
-    message.reply_channel.send({
-        'text': message.content['text']
-    })
+    # # Mirrors message back to sender
+    # message.reply_channel.send({
+    #     'text': message.content['text']
+    # })
 
-    timestamp = obj['timestamp']
-    speed = obj['speed']
-    temp = obj['temp']
-    # pressure = obj['pressure']
-    # rpm = obj['rpm']
-    # fuel_flow = obj['fuel_flow']
+    if obj['type'] == 'log_begin':
+        recording = True
 
-    status = EngineStatus(
-        timestamp=timestamp,
-        speed=speed,
-        temperature=temp)
-    #pressure=pressure, rpm=rpm, fuel_flow=fuel_flow
-    status.save()
-    # print(status.id)
+    elif obj['type'] == 'log_end':
+        recording = False
+
+    elif obj['type'] == 'engine_stat':
+
+        new_timestamp = obj['timestamp']
+        new_speed = obj['speed']
+        new_temp = obj['temp']
+        new_pressure = obj['pressure']
+        new_rpm = obj['rpm']
+        new_fuel_flow = obj['fuel_flow']
+
+        # TODO: SEND TO DASHBOARD
+
+        if recording:
+            status = EngineStatus(
+                timestamp=new_timestamp,
+                speed=new_speed,
+                temperature=new_temp,
+                rpm=new_rpm,
+                pressure=new_pressure,
+                fuel_flow=new_fuel_flow)
+            status.save()
+
+
+

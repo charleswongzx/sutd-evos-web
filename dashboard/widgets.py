@@ -3,15 +3,18 @@ from dashing.widgets import NumberWidget
 from dashing.widgets import KnobWidget
 from random import randint
 
+import time
+
 users = randint(50, 100)
 
 
-class SpeedWidget(KnobWidget):
+class SpeedWidget(NumberWidget):
     title = 'Speed'
 
     def get_value(self):
-
-        return stat.o
+        global users
+        users += 1
+        return users
 
 
 class NewClientsWidget(NumberWidget):
