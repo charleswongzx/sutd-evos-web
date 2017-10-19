@@ -1,8 +1,17 @@
 from channels import Group
 from .models import EngineStatus
 import json
+from django.core.cache import cache
 
 recording = False
+
+# TEST VALUES
+cache.set('timestamp', 50, 30)
+cache.set('speed', 50, 30)
+cache.set('temp', 50, 30)
+cache.set('pressure', 50, 30)
+cache.set('rpm', 50, 30)
+cache.set('fuel_flow', 50, 30)
 
 
 def ws_connect(message):
@@ -16,13 +25,7 @@ def ws_disconnect(message):
 
 def ws_message(message):
     global recording
-
     obj = json.loads(message.content['text'])
-
-    # # Mirrors message back to sender
-    # message.reply_channel.send({
-    #     'text': message.content['text']
-    # })
 
     if obj['type'] == 'log_begin':
         recording = True
@@ -39,7 +42,13 @@ def ws_message(message):
         new_rpm = obj['rpm']
         new_fuel_flow = obj['fuel_flow']
 
-        # TODO: SEND TO DASHBOARD
+        # Send stats to cache
+        cache.set('timestamp', new_timestamp, 30)
+        cache.set('speed', new_speed, 30)
+        cache.set('temp', new_temp, 30)
+        cache.set('pressure', new_pressure, 30)
+        cache.set('rpm', new_rpm, 30)
+        cache.set('fuel_flow', new_fuel_flow, 30)
 
         if recording:
             status = EngineStatus(

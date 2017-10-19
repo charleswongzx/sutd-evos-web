@@ -1,4 +1,4 @@
-var mainDashboard = new Dashboard({"widgetBaseDimensions":[368,207]});
+var mainDashboard = new Dashboard({"widgetBaseDimensions":[140,140]});
 
 //mainDashboard.addWidget('new_users_widget', 'Number', {
 //    getData: function () {
@@ -11,17 +11,39 @@ var mainDashboard = new Dashboard({"widgetBaseDimensions":[368,207]});
 //});
 
 
-mainDashboard.addWidget('speed_widget', 'Number', {
+mainDashboard.addWidget('speed_widget', 'Knob', {
     getData: function () {
         var self = this;
         Dashing.utils.get('speed_widget', function(data) {
             $.extend(self.scope, data);
         });
     },
-    interval: 100
+    interval: 100,
+    detail: 'km/h'
 });
 
-//var d = new Date()
+mainDashboard.addWidget('temp_widget', 'Knob', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('temp_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 100,
+    detail: 'deg'
+});
+
+mainDashboard.addWidget('pressure_widget', 'Knob', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('pressure_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 100,
+    detail: 'psi'
+});
+
 
 //mainDashboard.addWidget('speed_widget', 'Knob', {
 //    getData: function () {
@@ -40,7 +62,10 @@ mainDashboard.addWidget('speed_widget', 'Number', {
 //                readOnly: true,
 //                format: function(value) { return value; }
 //            },
-//            interval: 100
+//            Dashing.utils.get('speed_widget', function(data) {
+//            $.extend(self.scope, data);
 //        });
-//    }
+//        });
+//    },
+//    interval: 100
 //});
