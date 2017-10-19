@@ -5,10 +5,14 @@ from dashing.utils import router
 
 from django.views.generic.base import RedirectView
 
-from dashboard.widgets import NewClientsWidget, SpeedWidget
+from dashboard.widgets import SpeedWidget
+from dashboard.widgets import TempWidget
+from dashboard.widgets import PressureWidget
 
-router.register(NewClientsWidget, 'new_users_widget')
 router.register(SpeedWidget, 'speed_widget')
+router.register(TempWidget, 'temp_widget')
+router.register(PressureWidget, 'pressure_widget')
+
 
 urlpatterns = [
     # url(r'^test/', include(router.urls)),  # main dashboard
