@@ -7,6 +7,7 @@ recording = False
 
 # TEST VALUES
 cache.set('timestamp', 50, 30)
+cache.set('running', False, 30)
 cache.set('speed', 50, 30)
 cache.set('temp', 50, 30)
 cache.set('pressure', 50, 30)
@@ -36,6 +37,7 @@ def ws_message(message):
     elif obj['type'] == 'engine_stat':
 
         new_timestamp = obj['timestamp']
+        new_running = obj['running']
         new_speed = obj['speed']
         new_temp = obj['temp']
         new_pressure = obj['pressure']
@@ -43,12 +45,13 @@ def ws_message(message):
         new_fuel_flow = obj['fuel_flow']
 
         # Send stats to cache
-        cache.set('timestamp', new_timestamp, 30)
-        cache.set('speed', new_speed, 30)
-        cache.set('temp', new_temp, 30)
-        cache.set('pressure', new_pressure, 30)
-        cache.set('rpm', new_rpm, 30)
-        cache.set('fuel_flow', new_fuel_flow, 30)
+        cache.set('timestamp', new_timestamp, 3)
+        cache.set('timestamp', new_running, 3)
+        cache.set('speed', new_speed, 3)
+        cache.set('temp', new_temp, 3)
+        cache.set('pressure', new_pressure, 3)
+        cache.set('rpm', new_rpm, 3)
+        cache.set('fuel_flow', new_fuel_flow, 3)
 
         if recording:
             status = EngineStatus(
