@@ -12,7 +12,6 @@ from django.core.cache import cache
 # cache.set('fuel_flow', 50, 30)
 
 
-# Base telemetry widget based off base widget class
 class TelemetryWidget(Widget):
     title = ''
     value = ''
@@ -229,6 +228,7 @@ class PressureWidget(KnobWidget):
 
 class RPMWidget(KnobWidget):
     title = 'RPM'
+    theme = 'blue'
     rpm = 0
     colour = '#FFFFFF'
     data = {'angleArc': 240,
@@ -236,15 +236,19 @@ class RPMWidget(KnobWidget):
             'displayInput': True,
             'step': 1,
             'min': 0,
-            'max': 70,
+            'max': 5000,
             'readOnly': True,
-            'width': 100,
-            'height': 100,
+            'width': 150,
+            'height': 150,
             'fgColor': colour,
-            'bgColor': '#d3d3d3',
+            'bgColor': '#999999',
+            'thickness': 0.25,
             'inputColor': colour
             }
-    detail = 'RPM'
+    detail = 'revs/min'
+
+    def get_theme(self):
+        return self.theme
 
     def get_value(self):
         new_rpm = cache.get('rpm')
@@ -256,34 +260,18 @@ class RPMWidget(KnobWidget):
         return self.rpm
 
     def update_colour(self):
-        if self.rpm <= 20:
-            self.colour = '#65a163'  # green
-        elif 20 < self.rpm <= 40:
-            self.colour = '#ffeb75'  # yellow
-        elif 40 < self.rpm <= 50:
-            self.colour = '#f69e54'  # orange
+        print(self.rpm)
+        if self.rpm <= 1000:
+            self.data['fgColor'] = '#65a163'  # green
+        elif 1000 < self.rpm <= 2000:
+            self.data['fgColor'] = '#ffeb75'  # yellow
+        elif 2000 < self.rpm <= 3000:
+            self.data['fgColor'] = '#f69e54'  # orange
         else:
-            self.colour = '#fb556e'  # red
+            self.data['fgColor'] = '#fb556e'  # red
 
     def get_data(self):
-        data = {'angleArc': 240,
-                'angleOffset': -120,
-                'displayInput': True,
-                'step': 1,
-                'min': 0,
-                'max': 70,
-                'readOnly': True,
-                'width': 100,
-                'height': 100,
-                'fgColor': self.colour,
-                'bgColor': '#d3d3d3',
-                'inputColor': self.colour,
-                'lineCap': 'round',
-                'thickness': 0.15,
-                # 'font': '"Lato", sans-serif',
-                # 'fontWeight': 100,
-                }
-        return data
+        return self.data
 
 
 class MileageWidget(KnobWidget):

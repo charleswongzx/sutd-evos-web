@@ -1,9 +1,13 @@
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles.templatetags.staticfiles import static
+
 
 from dashing.utils import router
 
 from django.views.generic.base import RedirectView
+
+
 
 from dashboard.widgets import SpeedWidget
 from dashboard.widgets import TempWidget
@@ -17,7 +21,7 @@ router.register(TempWidget, 'temp_widget')
 router.register(PressureWidget, 'pressure_widget')
 router.register(RPMWidget, 'rpm_widget')
 router.register(MileageWidget, 'mileage_widget')
-# router.register(TelemetryWidget, 'telemetry_widget')
+router.register(TelemetryWidget, 'telemetry')
 
 
 urlpatterns = [
@@ -27,3 +31,5 @@ urlpatterns = [
     url(r'^dashboard/', include(router.urls)),
     url(r'^$', RedirectView.as_view(url='dashboard/'), name='index')
 ]
+
+url = static('dashboard/static/widgets')

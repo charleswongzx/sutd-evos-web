@@ -9,9 +9,9 @@ recording = False
 cache.set('timestamp', 50, 30)
 cache.set('running', False, 30)
 cache.set('speed', 50, 30)
-cache.set('temp', 50, 30)
+cache.set('temp', 250, 30)
 cache.set('pressure', 50, 30)
-cache.set('rpm', 50, 30)
+cache.set('rpm', 2210, 30)
 cache.set('fuel_flow', 50, 30)
 
 

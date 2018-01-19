@@ -3,7 +3,7 @@
 Dashing.widgets.TelemetryWidget = function(dashboard) {
     var self = this,
         widget;
-    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'telemetry_widget', {
+    self.__init__ =  Dashing.utils.widgetInit(dashboard, 'telemetry', {
         require: ['jqueryKnob']
     });
     this.row = 1;
@@ -16,7 +16,7 @@ Dashing.widgets.TelemetryWidget = function(dashboard) {
     this.interval = 10000;
 };
 
-rivets.binders['telemetry_widget'] = function binder(el, data) {
+rivets.binders['telemetry'] = function binder(el, data) {
     if (!data) return;
     if (!$.fn.knob) {
         $(document).on('libs/jqueryKnob/loaded', binder.bind(this, el, data));

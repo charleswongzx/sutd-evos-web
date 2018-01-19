@@ -12,6 +12,17 @@ var mainDashboard = new Dashboard();
 
 widget_refresh_rate = 1000
 
+mainDashboard.addWidget('test_widget', 'telemetry', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('test_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: widget_refresh_rate,
+    detail: 'km/h'
+});
+
 mainDashboard.addWidget('clock_widget', 'Clock');
 
 
