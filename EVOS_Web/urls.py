@@ -2,12 +2,9 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from django.contrib.staticfiles.templatetags.staticfiles import static
 
-
 from dashing.utils import router
 
 from django.views.generic.base import RedirectView
-
-
 
 from dashboard.widgets import SpeedWidget
 from dashboard.widgets import TempWidget
@@ -32,4 +29,4 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='dashboard/'), name='index')
 ]
 
-url = static('dashboard/static/widgets')
+url = static('dashboard/static/dashing/widgets')

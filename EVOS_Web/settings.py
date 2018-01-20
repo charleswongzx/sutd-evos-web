@@ -37,13 +37,13 @@ DASHING = {
 }
 
 INSTALLED_APPS = (
+    'dashboard',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dashboard',
     'dashing',
     'logger',
     'channels',

@@ -10,12 +10,12 @@ var mainDashboard = new Dashboard();
 //    interval: 5000
 //});
 
-widget_refresh_rate = 1000
+widget_refresh_rate = 500
 
-mainDashboard.addWidget('test_widget', 'telemetry', {
+mainDashboard.addWidget('telemetry', 'TelemetryWidget', {
     getData: function () {
         var self = this;
-        Dashing.utils.get('test_widget', function(data) {
+        Dashing.utils.get('telemetry', function(data) {
             $.extend(self.scope, data);
         });
     },
