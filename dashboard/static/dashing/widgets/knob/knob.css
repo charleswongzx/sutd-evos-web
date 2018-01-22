@@ -1,10 +1,10 @@
 .widget-knob {
-    background-color: #000;
-    opacity: 0.5;
+    background-color: #4b4d52;
 }
 
 .widget-knob h1 {
     color: rgba(255, 255, 255, 0.7);
+    font-family: monospace;
 }
 
 .widget-knob h2 {
@@ -16,6 +16,8 @@
     font-size: 30px;
     color: #fff;
     padding-bottom: 20px;
+    margin-top: -40px;
+    font-family: monospace;
 }
 
 .widget-knob .more-info {

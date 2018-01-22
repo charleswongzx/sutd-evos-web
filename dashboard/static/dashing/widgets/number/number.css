@@ -1,0 +1,30 @@
+.widget-number {
+
+    background: rgba(0,0,0,0);
+}
+
+.widget-number h1 {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: monospace;
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+
+.widget-number h2 {
+    color: #fff;
+
+    margin-top: -20px;
+}
+
+.widget-number .detail {
+    font-weight: 500;
+    font-size: 15px;
+    color: #fff;
+    padding-top: 15px;
+    padding-bottom: 20px;
+}
+
+.widget-number .more-info {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: monospace;
+}

@@ -1,32 +1,37 @@
-var mainDashboard = new Dashboard();
+var w = window.innerWidth;
+var h = window.innerHeight;
 
-//mainDashboard.addWidget('new_users_widget', 'Number', {
-//    getData: function () {
-//        var self = this;
-//        Dashing.utils.get('new_users_widget', function(scope) {
-//            $.extend(self.scope, scope);
-//        });
-//    },
-//    interval: 5000
-//});
+var horizontal_res = 8;
+var vertical_res = 5;
+
+var mainDashboard = new Dashboard({'widgetBaseDimensions': [w/horizontal_res, h/vertical_res]});
 
 widget_refresh_rate = 500
 
-mainDashboard.addWidget('telemetry', 'TelemetryWidget', {
+//mainDashboard.addWidget('telemetry', 'TelemetryGauge', {
+//    getData: function () {
+//        var self = this;
+//        Dashing.utils.get('telemetry', function(data) {
+//            $.extend(self.scope, data);
+//        });
+//    },
+//    interval: widget_refresh_rate,
+//    detail: 'km/h'
+//});
+
+mainDashboard.addWidget('lap_widget', 'Number', {
     getData: function () {
         var self = this;
-        Dashing.utils.get('telemetry', function(data) {
+        Dashing.utils.get('lap_widget', function(data) {
             $.extend(self.scope, data);
         });
     },
     interval: widget_refresh_rate,
-    detail: 'km/h'
+    detail: 'laps'
 });
 
-mainDashboard.addWidget('clock_widget', 'Clock');
 
-
-mainDashboard.addWidget('speed_widget', 'Knob', {
+mainDashboard.addWidget('speed_widget', 'TelemetryGauge', {
     getData: function () {
         var self = this;
         Dashing.utils.get('speed_widget', function(data) {
@@ -37,7 +42,7 @@ mainDashboard.addWidget('speed_widget', 'Knob', {
     detail: 'km/h'
 });
 
-mainDashboard.addWidget('rpm_widget', 'Knob', {
+mainDashboard.addWidget('rpm_widget', 'TelemetryGauge', {
     getData: function () {
         var self = this;
         Dashing.utils.get('rpm_widget', function(data) {
@@ -49,7 +54,7 @@ mainDashboard.addWidget('rpm_widget', 'Knob', {
 });
 
 
-mainDashboard.addWidget('temp_widget', 'Knob', {
+mainDashboard.addWidget('temp_widget', 'TelemetryGauge', {
     getData: function () {
         var self = this;
         Dashing.utils.get('temp_widget', function(data) {
@@ -60,18 +65,18 @@ mainDashboard.addWidget('temp_widget', 'Knob', {
     detail: 'deg'
 });
 
-mainDashboard.addWidget('pressure_widget', 'Knob', {
-    getData: function () {
-        var self = this;
-        Dashing.utils.get('pressure_widget', function(data) {
-            $.extend(self.scope, data);
-        });
-    },
-    interval: widget_refresh_rate,
-    detail: 'psi'
-});
+//mainDashboard.addWidget('pressure_widget', 'TelemetryGauge', {
+//    getData: function () {
+//        var self = this;
+//        Dashing.utils.get('pressure_widget', function(data) {
+//            $.extend(self.scope, data);
+//        });
+//    },
+//    interval: widget_refresh_rate,
+//    detail: 'psi'
+//});
 
-mainDashboard.addWidget('mileage_widget', 'Knob', {
+mainDashboard.addWidget('mileage_widget', 'TelemetryGauge', {
     getData: function () {
         var self = this;
         Dashing.utils.get('mileage_widget', function(data) {
@@ -84,7 +89,7 @@ mainDashboard.addWidget('mileage_widget', 'Knob', {
 
 
 
-//mainDashboard.addWidget('speed_widget', 'Knob', {
+//mainDashboard.addWidget('speed_widget', 'TelemetryGauge', {
 //    getData: function () {
 //        $.extend(this.scope, {
 //            title: 'Speed',

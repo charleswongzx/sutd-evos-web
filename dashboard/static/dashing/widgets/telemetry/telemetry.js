@@ -1,6 +1,6 @@
 /* global $, rivets, Dashing */
 
-Dashing.widgets.TelemetryWidget = function(dashboard) {
+Dashing.widgets.TelemetryGauge = function(dashboard) {
     var self = this,
         widget;
     self.__init__ =  Dashing.utils.widgetInit(dashboard, 'telemetry', {

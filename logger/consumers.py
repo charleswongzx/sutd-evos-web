@@ -41,6 +41,9 @@ def ws_message(message):
     elif obj['type'] == 'eng_toggle':
         cache.set('eng_toggle', obj['toggle'], None)
 
+    elif obj['type'] == 'lap_count':
+        cache.set('current_lap', obj['current_lap'], None)
+
     elif obj['type'] == 'ax_control':
         cache.set('timestamp', obj['timestamp'], None)
         cache.set('source', obj['source'], None)

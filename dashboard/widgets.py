@@ -12,7 +12,7 @@ from django.core.cache import cache
 # cache.set('fuel_flow', 50, 30)
 
 
-class TelemetryWidget(Widget):
+class TelemetryGauge(KnobWidget):
     title = ''
     value = ''
     data = {}
@@ -49,7 +49,7 @@ class TelemetryWidget(Widget):
         }
 
 
-class SpeedWidget(KnobWidget):
+class SpeedWidget(TelemetryGauge):
     title = 'Speed'
     speed = 0
     colour = '#FFFFFF'
@@ -58,12 +58,13 @@ class SpeedWidget(KnobWidget):
             'displayInput': True,
             'step': 1,
             'min': 0,
-            'max': 70,
+            'max': 100,
             'readOnly': True,
-            'width': 100,
-            'height': 100,
+            'width': 150,
+            'height': 150,
             'fgColor': colour,
-            'bgColor': '#d3d3d3',
+            'bgColor': '#999999',
+            'thickness': 0.25,
             'inputColor': colour
             }
     detail = 'km/h'
@@ -79,37 +80,20 @@ class SpeedWidget(KnobWidget):
 
     def update_colour(self):
         if self.speed <= 20:
-            self.colour = '#65a163'  # green
+            self.data['fgColor'] = '#65a163'  # green
         elif 20 < self.speed <= 40:
-            self.colour = '#ffeb75'  # yellow
+            self.data['fgColor'] = '#ffeb75'  # yellow
         elif 40 < self.speed <= 50:
-            self.colour = '#f69e54'  # orange
+            self.data['fgColor'] = '#f69e54'  # orange
         else:
-            self.colour = '#fb556e'  # red
+            self.data['fgColor'] = '#fb556e'  # red
 
     def get_data(self):
-        data = {'angleArc': 240,
-                'angleOffset': -120,
-                'displayInput': True,
-                'step': 1,
-                'min': 0,
-                'max': 70,
-                'readOnly': True,
-                'width': 100,
-                'height': 100,
-                'fgColor': self.colour,
-                'bgColor': '#d3d3d3',
-                'inputColor': self.colour,
-                'lineCap': 'round',
-                'thickness': 0.15,
-                # 'font': '"Lato", sans-serif',
-                # 'fontWeight': 100,
-                }
-        return data
+        return self.data
 
 
-class TempWidget(KnobWidget):
-    title = 'Temp'
+class TempWidget(TelemetryGauge):
+    title = 'Eng. Temp.'
     temp = 0
     colour = '#FFFFFF'
     data = {'angleArc': 240,
@@ -117,12 +101,13 @@ class TempWidget(KnobWidget):
             'displayInput': True,
             'step': 1,
             'min': 0,
-            'max': 70,
+            'max': 500,
             'readOnly': True,
-            'width': 100,
-            'height': 100,
+            'width': 150,
+            'height': 150,
             'fgColor': colour,
-            'bgColor': '#d3d3d3',
+            'bgColor': '#999999',
+            'thickness': 0.25,
             'inputColor': colour
             }
     detail = u'\u2103'
@@ -138,36 +123,19 @@ class TempWidget(KnobWidget):
 
     def update_colour(self):
         if self.temp <= 20:
-            self.colour = '#65a163'  # green
+            self.data['fgColor'] = '#65a163'  # green
         elif 20 < self.temp <= 40:
-            self.colour = '#ffeb75'  # yellow
+            self.data['fgColor'] = '#ffeb75'  # yellow
         elif 40 < self.temp <= 50:
-            self.colour = '#f69e54'  # orange
+            self.data['fgColor'] = '#f69e54'  # orange
         else:
-            self.colour = '#fb556e'  # red
+            self.data['fgColor'] = '#fb556e'  # red
 
     def get_data(self):
-        data = {'angleArc': 240,
-                'angleOffset': -120,
-                'displayInput': True,
-                'step': 1,
-                'min': 0,
-                'max': 70,
-                'readOnly': True,
-                'width': 100,
-                'height': 100,
-                'fgColor': self.colour,
-                'bgColor': '#d3d3d3',
-                'inputColor': self.colour,
-                'lineCap': 'round',
-                'thickness': 0.15,
-                # 'font': '"Lato", sans-serif',
-                # 'fontWeight': 100,
-                }
-        return data
+        return self.data
 
 
-class PressureWidget(KnobWidget):
+class PressureWidget(TelemetryGauge):
     title = 'Pressure'
     pressure = 0
     colour = '#FFFFFF'
@@ -176,12 +144,13 @@ class PressureWidget(KnobWidget):
             'displayInput': True,
             'step': 1,
             'min': 0,
-            'max': 70,
+            'max': 5000,
             'readOnly': True,
-            'width': 100,
-            'height': 100,
+            'width': 150,
+            'height': 150,
             'fgColor': colour,
-            'bgColor': '#d3d3d3',
+            'bgColor': '#999999',
+            'thickness': 0.25,
             'inputColor': colour
             }
     detail = 'psi'
@@ -197,36 +166,19 @@ class PressureWidget(KnobWidget):
 
     def update_colour(self):
         if self.pressure <= 20:
-            self.colour = '#65a163'  # green
+            self.data['fgColor'] = '#65a163'  # green
         elif 20 < self.pressure <= 40:
-            self.colour = '#ffeb75'  # yellow
+            self.data['fgColor'] = '#ffeb75'  # yellow
         elif 40 < self.pressure <= 50:
-            self.colour = '#f69e54'  # orange
+            self.data['fgColor'] = '#f69e54'  # orange
         else:
-            self.colour = '#fb556e'  # red
+            self.data['fgColor'] = '#fb556e'  # red
 
     def get_data(self):
-        data = {'angleArc': 240,
-                'angleOffset': -120,
-                'displayInput': True,
-                'step': 1,
-                'min': 0,
-                'max': 70,
-                'readOnly': True,
-                'width': 100,
-                'height': 100,
-                'fgColor': self.colour,
-                'bgColor': '#d3d3d3',
-                'inputColor': self.colour,
-                'lineCap': 'round',
-                'thickness': 0.15,
-                # 'font': '"Lato", sans-serif',
-                # 'fontWeight': 100,
-                }
-        return data
+        return self.data
 
 
-class RPMWidget(KnobWidget):
+class RPMWidget(TelemetryGauge):
     title = 'RPM'
     theme = 'blue'
     rpm = 0
@@ -274,7 +226,7 @@ class RPMWidget(KnobWidget):
         return self.data
 
 
-class MileageWidget(KnobWidget):
+class MileageWidget(TelemetryGauge):
     title = 'Mileage'
     mileage = 0
     colour = '#FFFFFF'
@@ -283,12 +235,13 @@ class MileageWidget(KnobWidget):
             'displayInput': True,
             'step': 1,
             'min': 0,
-            'max': 70,
+            'max': 400,
             'readOnly': True,
-            'width': 100,
-            'height': 100,
+            'width': 150,
+            'height': 150,
             'fgColor': colour,
-            'bgColor': '#d3d3d3',
+            'bgColor': '#999999',
+            'thickness': 0.25,
             'inputColor': colour
             }
     detail = 'km/l'
@@ -304,30 +257,28 @@ class MileageWidget(KnobWidget):
 
     def update_colour(self):
         if self.mileage <= 20:
-            self.colour = '#fb556e'  # red
+            self.data['fgColor'] = '#fb556e'  # red
         elif 20 < self.mileage <= 40:
-            self.colour = '#f69e54'  # orange
+            self.data['fgColor'] = '#f69e54'  # orange
         elif 40 < self.mileage <= 50:
-            self.colour = '#ffeb75'  # yellow
+            self.data['fgColor'] = '#ffeb75'  # yellow
         else:
-            self.colour = '#65a163'  # green
+            self.data['fgColor'] = '#65a163'  # green
 
     def get_data(self):
-        data = {'angleArc': 240,
-                'angleOffset': -120,
-                'displayInput': True,
-                'step': 1,
-                'min': 0,
-                'max': 70,
-                'readOnly': True,
-                'width': 100,
-                'height': 100,
-                'fgColor': self.colour,
-                'bgColor': '#d3d3d3',
-                'inputColor': self.colour,
-                'lineCap': 'round',
-                'thickness': 0.15,
-                # 'font': '"Lato", sans-serif',
-                # 'fontWeight': 100,
-                }
-        return data
+        return self.data
+
+
+class LapWidget(NumberWidget):
+    title = 'Current Lap'
+    current_lap = 0
+
+    def get_value(self):
+        self.current_lap = cache.get('current_lap')
+        return 0
+
+    def get_detail(self):
+        return '/10'
+
+    # def get_more_info(self):
+    #     return 'laps'

@@ -1,27 +1,30 @@
-.widget-knob {
-    background-color: #d3d3d3;
-    opacity: 0.5;
+.widget-telemetry {
+    background-color: rgba(0, 0, 0, 0.0);
 }
 
-.widget-knob h1 {
+.widget-telemetry h1 {
     color: rgba(255, 255, 255, 0.7);
+    font-size: 20px;
+    font-family: monospace;
 }
 
-.widget-knob h2 {
+.widget-telemetry h2 {
     color: #fff;
 }
 
-.widget-knob .detail {
+.widget-telemetry .detail {
     font-weight: 500;
-    font-size: 30px;
+    font-size: 15px;
     color: #fff;
     padding-bottom: 20px;
+    margin-top: -40px;
 }
 
-.widget-knob .more-info {
+.widget-telemetry .more-info {
     color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
 }
 
-.widget-knob .updated-at {
+.widget-telemetry .updated-at {
     color: rgba(0, 0, 0, 0.5);
 }
