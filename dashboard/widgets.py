@@ -2,7 +2,10 @@
 from dashing.widgets import NumberWidget
 from dashing.widgets import KnobWidget
 from dashing.widgets import Widget
+from dashing.widgets import GraphWidget
 from django.core.cache import cache
+
+import time
 
 # cache.set('timestamp', 50, 30)
 # cache.set('speed', 50, 30)
@@ -12,41 +15,52 @@ from django.core.cache import cache
 # cache.set('fuel_flow', 50, 30)
 
 
-class TelemetryGauge(KnobWidget):
-    title = ''
-    value = ''
-    data = {}
-    detail = ''
-    more_info = ''
-    updated_at = ''
+class BannerWidget(Widget):
+    title = 'SUTD EVOS'
 
-    def get_title(self):
-        return self.title
 
-    def get_data(self):
-        return self.data
+class ButtonPanelWidget(Widget):
+    title = 'Control Panel'
+    detail = 'Control Panel'
 
     def get_detail(self):
         return self.detail
 
-    def get_more_info(self):
-        return self.more_info
 
-    def get_value(self):
-        return self.value
+class FuelGraphWidget(GraphWidget):
+    title = 'Fuel Consumption'
+    more_info = 'km/l vs time (seconds)'
+    start_time = time.time()
+    data = [{'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            {'x': 0, 'y': 0},
+            ]
 
-    def get_updated_at(self):
-        return self.updated_at
+    def get_data(self):
+        new_consumption = cache.get('fuel_flow')
+        self.data.pop(0)
+        if new_consumption:
+            self.data.append({'x': time.time()-self.start_time, 'y': new_consumption})
+        else:
+            self.data.append({'x': time.time()-self.start_time, 'y': 0})
+        return self.data
 
-    def get_context(self):
-        return {
-            'title': self.get_title(),
-            'value': self.get_value(),
-            'data': self.get_data(),
-            'detail': self.get_detail(),
-            'moreInfo': self.get_more_info(),
-            'updatedAt': self.get_updated_at(),
-        }
+
+class TelemetryGauge(KnobWidget):
+    title = ''
 
 
 class SpeedWidget(TelemetryGauge):
@@ -65,7 +79,7 @@ class SpeedWidget(TelemetryGauge):
             'fgColor': colour,
             'bgColor': '#999999',
             'thickness': 0.25,
-            'inputColor': colour
+            'inputColor': colour,
             }
     detail = 'km/h'
 
@@ -84,12 +98,11 @@ class SpeedWidget(TelemetryGauge):
         elif 20 < self.speed <= 40:
             self.data['fgColor'] = '#ffeb75'  # yellow
         elif 40 < self.speed <= 50:
-            self.data['fgColor'] = '#f69e54'  # orange
+            self.data['fgColor'] = 'linear-gradient(to right, #0072ff, #00c6ff);'# /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+                #'#f69e54'  # orange
         else:
             self.data['fgColor'] = '#fb556e'  # red
-
-    def get_data(self):
-        return self.data
 
 
 class TempWidget(TelemetryGauge):
@@ -131,9 +144,6 @@ class TempWidget(TelemetryGauge):
         else:
             self.data['fgColor'] = '#fb556e'  # red
 
-    def get_data(self):
-        return self.data
-
 
 class PressureWidget(TelemetryGauge):
     title = 'Pressure'
@@ -174,9 +184,6 @@ class PressureWidget(TelemetryGauge):
         else:
             self.data['fgColor'] = '#fb556e'  # red
 
-    def get_data(self):
-        return self.data
-
 
 class RPMWidget(TelemetryGauge):
     title = 'RPM'
@@ -212,7 +219,6 @@ class RPMWidget(TelemetryGauge):
         return self.rpm
 
     def update_colour(self):
-        print(self.rpm)
         if self.rpm <= 1000:
             self.data['fgColor'] = '#65a163'  # green
         elif 1000 < self.rpm <= 2000:
@@ -221,9 +227,6 @@ class RPMWidget(TelemetryGauge):
             self.data['fgColor'] = '#f69e54'  # orange
         else:
             self.data['fgColor'] = '#fb556e'  # red
-
-    def get_data(self):
-        return self.data
 
 
 class MileageWidget(TelemetryGauge):
@@ -265,9 +268,6 @@ class MileageWidget(TelemetryGauge):
         else:
             self.data['fgColor'] = '#65a163'  # green
 
-    def get_data(self):
-        return self.data
-
 
 class LapWidget(NumberWidget):
     title = 'Current Lap'
@@ -280,5 +280,3 @@ class LapWidget(NumberWidget):
     def get_detail(self):
         return '/10'
 
-    # def get_more_info(self):
-    #     return 'laps'

@@ -6,8 +6,8 @@ Dashing.widgets.TelemetryGauge = function(dashboard) {
     self.__init__ =  Dashing.utils.widgetInit(dashboard, 'telemetry', {
         require: ['jqueryKnob']
     });
-    this.row = 1;
-    this.col = 1;
+    this.row = 3;
+    this.col = 2;
     this.scope = {};
     this.getWidget = function () {
         return widget;

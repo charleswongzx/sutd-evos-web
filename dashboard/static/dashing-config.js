@@ -1,10 +1,10 @@
 var w = window.innerWidth;
 var h = window.innerHeight;
 
-var horizontal_res = 8;
-var vertical_res = 5;
+var horizontal_res = 23;
+var vertical_res = 16;
 
-var mainDashboard = new Dashboard({'widgetBaseDimensions': [w/horizontal_res, h/vertical_res]});
+var mainDashboard = new Dashboard({'widgetBaseDimensions': [w/horizontal_res, h/vertical_res], 'widgetMargins': [10,10]});
 
 widget_refresh_rate = 500
 
@@ -19,16 +19,23 @@ widget_refresh_rate = 500
 //    detail: 'km/h'
 //});
 
-mainDashboard.addWidget('lap_widget', 'Number', {
+
+mainDashboard.addWidget('banner_widget', 'Banner');
+
+
+mainDashboard.addWidget('fuel_graph_widget', 'FuelGraph', {
     getData: function () {
         var self = this;
-        Dashing.utils.get('lap_widget', function(data) {
+        Dashing.utils.get('fuel_graph_widget', function(data) {
             $.extend(self.scope, data);
         });
     },
-    interval: widget_refresh_rate,
+    interval: 500,
     detail: 'laps'
 });
+
+
+
 
 
 mainDashboard.addWidget('speed_widget', 'TelemetryGauge', {
@@ -88,28 +95,37 @@ mainDashboard.addWidget('mileage_widget', 'TelemetryGauge', {
 });
 
 
+mainDashboard.addWidget('lap_widget', 'Number', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('lap_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: widget_refresh_rate,
+    detail: 'laps'
+});
 
-//mainDashboard.addWidget('speed_widget', 'TelemetryGauge', {
-//    getData: function () {
-//        $.extend(this.scope, {
-//            title: 'Speed',
-//            detail: 'km/h',
-//            value: d.getSeconds(),
-//            data: {
-//                angleArc: 280,
-//                angleOffset: -140,
-//                displayInput: true,
-//                displayPrevious: true,
-//                step: 1,
-//                min: 1,
-//                max: 70,
-//                readOnly: true,
-//                format: function(value) { return value; }
-//            },
-//            Dashing.utils.get('speed_widget', function(data) {
-//            $.extend(self.scope, data);
-//        });
-//        });
-//    },
-//    interval: widget_refresh_rate
-//});
+mainDashboard.addWidget('fuel_graph_widget', 'FuelGraph', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('fuel_graph_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: 500,
+    detail: 'laps'
+});
+
+
+
+mainDashboard.addWidget('button_panel_widget', 'ButtonPanel', {
+    getData: function () {
+        var self = this;
+        Dashing.utils.get('button_panel_widget', function(data) {
+            $.extend(self.scope, data);
+        });
+    },
+    interval: widget_refresh_rate,
+    detail: 'Control Panel'
+});

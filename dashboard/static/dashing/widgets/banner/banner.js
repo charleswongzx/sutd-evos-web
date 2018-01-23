@@ -1,11 +1,11 @@
 
 /* global Dashing */
 
-Dashing.widgets.Number = function(dashboard) {
+Dashing.widgets.Banner = function(dashboard) {
     var self = this;
-    self.__init__ = Dashing.utils.widgetInit(dashboard, 'number');
+    self.__init__ = Dashing.utils.widgetInit(dashboard, 'banner');
     self.row = 2;
-    self.col = 2;
+    self.col = 20;
 //    self.color = '#96bf48';
     self.scope = {};
     self.getWidget = function () {

@@ -1,0 +1,64 @@
+.widget-fuel_graph {
+    background-color: rgba(0,0,0,0);
+    position: relative;
+}
+
+.widget-fuel_graph svg {
+    position: absolute;
+    opacity: 0.7;
+    fill-opacity: 0.4;
+    left: 0px;
+    top: 0px;
+}
+
+.widget-fuel_graph h1, h2 {
+    position: relative;
+    z-index: 99;
+    font-family: monospace
+}
+
+.widget-fuel_graph h1 {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.widget-fuel_graph .more-info {
+    color: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 0;
+}
+
+.widget-fuel_graph .x_tick {
+    position: absolute;
+    bottom: 0;
+}
+
+.widget-fuel_graph .x_tick .title {
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.4);
+    opacity: 0.5;
+    padding-bottom: 3px;
+}
+
+.rickshaw_graph .y_ticks text, .rickshaw_graph .x_ticks_d3 text {
+    opacity: 1;
+}
+
+.widget-fuel_graph .y_ticks {
+    font-size: 20px;
+    fill: rgba(255,255,255, 1);
+    fill-opacity: 1;
+}
+
+.widget-fuel_graph .domain {
+    display: none;
+}
+
+.widget-fuel_graph .x_tick {
+    border: none;
+    fill: rgba(255,255,255, 1);
+}
+
+.widget-fuel_graph .tick {
+    //stroke: transparent !important;
+}

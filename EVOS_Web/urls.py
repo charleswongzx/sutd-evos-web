@@ -13,6 +13,9 @@ from dashboard.widgets import RPMWidget
 from dashboard.widgets import MileageWidget
 from dashboard.widgets import TelemetryGauge
 from dashboard.widgets import LapWidget
+from dashboard.widgets import BannerWidget
+from dashboard.widgets import ButtonPanelWidget
+from dashboard.widgets import FuelGraphWidget
 
 
 router.register(SpeedWidget, 'speed_widget')
@@ -22,6 +25,9 @@ router.register(RPMWidget, 'rpm_widget')
 router.register(MileageWidget, 'mileage_widget')
 router.register(TelemetryGauge, 'telemetry')
 router.register(LapWidget, 'lap_widget')
+router.register(BannerWidget, 'banner_widget')
+router.register(ButtonPanelWidget, 'button_panel_widget')
+router.register(FuelGraphWidget, 'fuel_graph_widget')
 
 
 urlpatterns = [
@@ -32,4 +38,4 @@ urlpatterns = [
     url(r'^$', RedirectView.as_view(url='dashboard/'), name='index')
 ]
 
-url = static('dashboard/static/dashing/widgets')
+# url = static('dashboard/static/dashing/widgets')

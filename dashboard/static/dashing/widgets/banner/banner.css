@@ -1,0 +1,16 @@
+.widget-banner {
+    background: rgba(0,0,0,0);
+}
+
+.widget-banner h1 {
+    color: rgba(255, 255, 255, 0.7);
+    font-family: monospace;
+    font-size: 20px;
+    padding-bottom: 15px;
+}
+
+.banner-lsogo {
+    max_width: 100%;
+    max-height: 100%;
+}
+

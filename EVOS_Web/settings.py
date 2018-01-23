@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 DASHING = {
-    'INSTALLED_WIDGETS': ('number', 'list', 'graph', 'telemetry', 'knob', 'clock'),
+    'INSTALLED_WIDGETS': ('number', 'telemetry', 'clock', 'banner', 'button_panel', 'fuel_graph'),
     'PERMISSION_CLASSES':  (
     )
 }
